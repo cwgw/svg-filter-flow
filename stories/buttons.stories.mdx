@@ -1,0 +1,137 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs/blocks';
+
+import Button from "../components/Button"
+import ComboboxButton from "../components/ComboboxButton"
+import MenuButton from "../components/MenuButton"
+
+export const defaults = {
+  label: "Fruits",
+  name: "fruit",
+  options: [
+    "Apple",
+    "Banana",
+    "Cantaloupe",
+    "Date",
+    "Elderberry",
+    "Fig",
+    "Grapefruit",
+    "Honeydew",
+    "Icaco",
+    "Jackfruit",
+  ],
+  placeholder: "Select"
+};
+
+<Meta
+  title="Buttons"
+  parameters={{
+    docs: {
+      source: {
+        type: 'code'
+      }
+    }
+  }}
+/>
+
+
+## Button
+
+<Story name="Button">
+  {(args) => <Button {...args}>Button</Button>}
+</Story>
+
+
+## MenuButton
+
+<Story
+  name="MenuButton"
+  argTypes={{
+    onChange: { action: "onChange" },
+    options: {
+      control: {
+        type: "array",
+      },
+      defaultValue: defaults.options,
+    },
+  }}
+>
+  {(args) => <MenuButton {...args}>MenuButton</MenuButton>}
+</Story>
+
+
+## ComboboxButton
+
+<Story
+  name="ComboboxButton"
+  argTypes={{
+    label: {
+      control: {
+        type: "text",
+      },
+      defaultValue: defaults.label,
+    },
+    name: {
+      control: {
+        type: "text",
+      },
+      defaultValue: defaults.name,
+    },
+    onChange: { action: "onChange" },
+    options: {
+      control: {
+        type: "array",
+      },
+      defaultValue: defaults.options,
+    },
+    placeholder: {
+      control: {
+        type: "text",
+      },
+      defaultValue: defaults.placeholder,
+    },
+    position: {
+      control: {
+        type: "select",
+        options: [
+          "bottom right",
+          "bottom left",
+          "top right",
+          "top left",
+        ],
+      },
+      defaultValue: "bottom right",
+    },
+  }}
+>
+  {(args) => <ComboboxButton {...args} />}
+</Story>
+
+
+<div style={{ display: "flex", marginTop: "1rem" }}>
+  
+<ComboboxButton
+  label={defaults.label}
+  name={defaults.name}
+  options={defaults.options}
+  placeholder={defaults.placeholder}
+  position="bottom left"
+/>
+
+<ComboboxButton
+  label={defaults.label}
+  name={defaults.name}
+  options={defaults.options}
+  placeholder={defaults.placeholder}
+  position="top left"
+/>
+
+<ComboboxButton
+  label={defaults.label}
+  name={defaults.name}
+  options={defaults.options}
+  placeholder={defaults.placeholder}
+  position="top right"
+/>
+
+</div>
+

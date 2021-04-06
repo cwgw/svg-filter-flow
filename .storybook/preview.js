@@ -6,20 +6,27 @@ import { shouldForwardProp } from "goober/should-forward-prop";
 import { useTheme } from "../style";
 import GlobalStyles from "../components/GlobalStyles";
 
-const noForward = ["as", "component", "labelId", "themeKey", "variant"];
+import dummy from "../stories/dummy-content";
 
 setup(
   createElement,
   prefix,
   useTheme,
-  shouldForwardProp((prop) => !noForward.includes(prop))
+  shouldForwardProp(
+    (prop) => prop !== "themeKey" && prop !== "variant" && prop !== "as"
+  )
 );
 
-export default function App({ Component, pageProps }) {
-  return (
+export const decorators = [
+  (Story) => (
     <Fragment>
       <GlobalStyles />
-      <Component {...pageProps} />
+      <Story />
     </Fragment>
-  );
-}
+  ),
+];
+
+export const parameters = {
+  actions: { argTypesRegex: "^on[A-Z].*" },
+  dummy,
+};

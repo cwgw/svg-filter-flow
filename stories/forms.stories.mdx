@@ -1,0 +1,229 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs/blocks';
+
+import { variants } from "../style"
+
+import FormField from "../components/FormField"
+import ColorInput from "../components/ColorInput"
+import ColorPicker from "../components/ColorPicker"
+import Combobox from "../components/Combobox"
+import ComboboxButton from "../components/ComboboxButton"
+import Listbox from "../components/Listbox"
+import Input from "../components/Input"
+import NumberInput from "../components/NumberInput"
+
+export const defaults = {
+  label: "Fruits",
+  name: "fruit",
+  options: [
+    "Apple",
+    "Banana",
+    "Cantaloupe",
+    "Date",
+    "Elderberry",
+    "Fig",
+    "Grapefruit",
+    "Honeydew",
+    "Icaco",
+    "Jackfruit",
+  ],
+  placeholder: "Select"
+};
+
+<Meta
+  title="Form Controls"
+  parameters={{
+    docs: {
+      source: {
+        type: 'code'
+      }
+    }
+  }}
+/>
+
+
+# Form Controls
+
+
+## FormField
+
+The `FormField` component renders a form control and label wrapped in a container `div`.
+
+Specify which form control is rendered with the `type` prop (`text` by default). Permissable values for the type prop are listed below along with their corresponding components:
+
+* `color` __ColorInput__
+* `combobox` __Combobox__
+* `listbox` __Listbox__
+* `number` __NumberInput__
+* `text` __Input__
+
+<Canvas>
+  <Story
+    name="FormField"
+    argTypes={{
+      variant: {
+        control: {
+          type: "select",
+          options: Object.keys(variants.forms.field)
+        },
+        defaultValue: "default",
+      },
+      type: {
+        control: {
+          type: "select",
+          options: [
+            "color",
+            "combobox",
+            "listbox",
+            "number",
+            "text",
+          ],
+        },
+        defaultValue: "text",
+      }
+    }}
+    args={{
+      name: "form-field",
+      placeholder: "Placeholder",
+      label: "Text input",
+    }}
+  >
+    {(args) => <FormField {...args} />}
+  </Story>
+</Canvas>
+
+
+## Input
+
+<Canvas>
+  <Story
+    name="Input"
+    argTypes={{
+      onChange: {
+        control: {
+          action: "onChange",
+        },
+      },
+      variant: {
+        control: {
+          type: "select",
+          options: Object.keys(variants.forms.input)
+        },
+        defaultValue: "default",
+      }
+    }}
+    args={{ 
+      name: "input",
+      placeholder: "Placeholder",
+    }}
+  >
+    {(args) => <Input {...args} />}
+  </Story>
+</Canvas>
+
+
+## NumberInput
+
+<Canvas>
+  <Story
+    name="NumberInput"
+    argTypes={{
+      onChange: {
+        control: {
+          action: "onChange",
+        },
+      },
+      variant: {
+        control: {
+          type: "select",
+          options: Object.keys(variants.forms.input)
+        },
+        defaultValue: "default",
+      }
+    }}
+    args={{ name: "input" }}
+  >
+    {(args) => <NumberInput {...args} />}
+  </Story>
+</Canvas>
+
+
+## Listbox
+
+A single-select listbox.
+
+Conforms to the [single-select listbox pattern](https://www.w3.org/TR/wai-aria-practices-1.2/#Listbox) as outlined in [WAI-ARIA Authoring Practices 1.2](https://www.w3.org/TR/wai-aria-practices-1.2/).
+
+<Canvas>
+  <Story
+    name="Listbox"
+    argTypes={{
+      onChange: { action: "onChange" },
+      options: { type: { name: "array" } }
+    }}
+    args={{
+      name: defaults.name,
+      options: defaults.options,
+      placeholder: defaults.placeholder,
+      variant: "default",
+    }}
+  >
+    {(args) => <Listbox {...args} />}
+  </Story>
+</Canvas>
+
+## Combobox
+
+<Canvas>
+  <Story
+    name="Combobox"
+    argTypes={{
+      onChange: { action: "onChange" },
+      options: { type: { name: "array" } }
+    }}
+    args={{
+      name: defaults.name,
+      options: defaults.options,
+      placeholder: defaults.placeholder,
+      variant: "default",
+    }}
+  >
+    {(props) => <Combobox {...props} />}
+  </Story>
+</Canvas>
+
+## ColorInput
+
+<Canvas>
+  <Story
+    name="ColorInput"
+    argTypes={{
+      value: {
+        control: "color",
+        defaultValue: "#ffaa66",
+      }
+    }}
+  >
+    {(args) => (
+      <ColorInput {...args} />
+    )}
+  </Story>
+</Canvas>
+
+
+## ColorPicker
+
+<Canvas>
+  <Story
+    name="ColorPicker"
+      argTypes={{
+      value: {
+        control: "color",
+        defaultValue: "#ffaa66",
+      }
+    }}
+  >
+    {(args) => (
+      <ColorPicker {...args} />
+    )}
+  </Story>
+</Canvas>

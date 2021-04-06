@@ -1,0 +1,81 @@
+import { Meta, Story } from '@storybook/addon-docs/blocks';
+import { globalStyles, theme, tokens, variants } from  "../style"
+
+<Meta title="Overview" />
+
+# Overview
+
+## Styling
+
+We use a constraint-based, themeable style system inspired by [Theme UI](https://theme-ui.com/).
+
+Styling is handled by [goober](https://goober.rocks/), the tiny css-in-js alternative to [styled-components](https://styled-components.com/) and [Emotion](https://emotion.sh/), but we provide our own `styled` function, a wrapper around goober's. Import it from `./style` as below.
+
+Note that as with Theme UI, we use object styles and not tagged template literals.
+
+```js
+import { styled } from "../style"
+
+// BAD
+// Tagged template literals are not supported
+const MyComponent = styled`
+  display: inline-block;
+  margin-left: auto;
+`;
+
+// GOOD
+// Use objects instead
+const MyComponent = styled("span")({
+  display: "inline-block",
+  marginLeft: "auto",
+});
+```
+
+### Theme
+
+As with Theme UI, our theme conforms to the [System UI theme spec](https://system-ui.com/theme/). Variant styles are also included but referenced as `theme.variants`. A component's variant and variant theme key can be specified with the `variant` and `themeKey` props as demonstrated below.
+
+```jsx
+<Link themeKey="buttons" variant="primary">
+  A button styled-link
+</Link>
+```
+
+<p>
+  <details>
+    <summary>Default theme scales</summary>
+    <pre>
+      <code className="language-json">
+        {JSON.stringify(tokens, undefined, 2)}
+      </code>
+    </pre>
+  </details>
+</p>
+
+<p>
+  <details>
+    <summary>Variants</summary>
+    <pre>
+      <code className="language-json">
+        {JSON.stringify(variants, undefined, 2)}
+      </code>
+    </pre>
+  </details>
+</p>
+
+### Global styles
+
+Global styles are provided by `./components/GlobalStyles`. The styles include browser resets from [Sindre Sorhus'](https://github.com/sindresorhus) [modern-normalize](https://github.com/sindresorhus/modern-normalize) and some opinionated defaults adapted from Tailwind's [preflight](https://tailwindcss.com/docs/preflight).
+
+<p>
+  <details>
+    <summary>All global styles</summary>
+    <pre>
+      <code className="language-json">
+        {JSON.stringify(globalStyles, undefined, 2)}
+      </code>
+    </pre>
+  </details>
+</p>
+
+## Components
