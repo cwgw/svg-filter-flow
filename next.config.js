@@ -1,3 +1,4 @@
+const path = require("path");
 const ESLintPlugin = require("eslint-webpack-plugin");
 
 module.exports = {
@@ -18,9 +19,11 @@ module.exports = {
       new ESLintPlugin({
         extensions: ["js", "jsx"],
         exclude: [".husky", ".next", "node_modules", "out"],
-        files: ["components", "context", "hooks", "pages", "style", "utils"],
+        files: ["src"],
       })
     );
+
+    config.resolve.modules.push(path.resolve("./src"));
 
     return config;
   },
